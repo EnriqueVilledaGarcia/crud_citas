@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="columns is-centered">
+  <div class="column is-8">
+    <div class="box has-background-white" style="border-radius: 10px; padding: 2rem;">
+      <div class="is-flex is-justify-content-space-between is-align-items-center mb-4">
+        <h1 class="title is-4 has-text-primary">Citas</h1>
+        <a href="{{ url_for('contactos.nuevo_contacto') }}" class="button is-primary">
+          <i class="fas fa-plus"></i>&nbsp;Nueva cita
+        </a>
+      </div>
+
+      {% if contactos %}
+        {% for c in contactos %}
+        <div class="card mb-4">
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <figure class="image is-48x48">
+                  <!-- Icono SVG de empresa/oficina -->
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="#4a90e2" viewBox="0 0 24 24" style="border-radius: 50%; background: #f5f5f5;">
+                    <rect x="3" y="7" width="7" height="13" rx="1"/>
+                    <rect x="14" y="3" width="7" height="17" rx="1"/>
+                    <rect x="7" y="13" width="3" height="7" rx="0.5" fill="#fff"/>
+                    <rect x="16" y="7" width="2" height="2" rx="0.5" fill="#fff"/>
+                    <rect x="16" y="11" width="2" height="2" rx="0.5" fill="#fff"/>
+                    <rect x="16" y="15" width="2" height="2" rx="0.5" fill="#fff"/>
+                  </svg>
+                </figure>
+              </div>
+              <div class="media-content">
+                <p class="title is-5">{{ c.nombre }}</p>
+                <p class="subtitle is-6 has-text-grey">
+                  <i class="fas fa-envelope"></i> {{ c.correo }}<br>
+                  <i class="fas fa-phone"></i> {{ c.telefono }}<br>
+                  <i class="fas fa-map-marker-alt"></i> {{ c.lugar }}<br>
+                  <i class="fas fa-calendar-alt"></i> {{ c.fecha.strftime('%d/%m/%Y') if c.fecha else 'No especificada' }} <br>
+                  <i class="fas fa-clock"></i> {{ c.hora.strftime('%H:%M') if c.hora else 'No especificada' }}<br>
+                  <i class="fas fa-user"></i> {{ c.motivo if c.motivo else 'No especificado' }}<br>
+                </p>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="{{ url_for('contactos.editar_contacto', id=c.id) }}" class="card-footer-item has-text-info">
+              <i class="fas fa-edit"></i>&nbsp;Editar
+            </a>
+            <a href="{{ url_for('contactos.eliminar_contacto', id=c.id) }}" class="card-footer-item has-text-danger">
+              <i class="fas fa-trash-alt"></i>&nbsp;Eliminar
+            </a>
+          </footer>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="notification is-warning">
+          No hay citas pendientes.
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

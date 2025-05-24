@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="columns is-centered">
+    <div class="column is-6">
+        <div class="card" style="border-left: 6px solid var(--accent-color);">
+            <div class="card-content">
+                <p class="title is-4 has-text-primary">Datos del cliente</p>
+                <form method="POST">
+                    <div class="field">
+                        <label class="label">Nombre de la empresa</label>
+                        <div class="control has-icons-left">
+                            <input class="input" type="text" name="nombre" required
+                                   placeholder="Ingresa el nombre"
+                                   value="{{ contacto.nombre if contacto else '' }}">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-user"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Teléfono</label>
+                        <div class="control has-icons-left">
+                            <input class="input" type="text" name="telefono" required
+                                   placeholder="Ingresa el teléfono"
+                                   value="{{ contacto.telefono if contacto else '' }}">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-phone"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Correo empresarial</label>
+                        <div class="control has-icons-left">
+                            <input class="input" type="email" name="correo" required
+                                   placeholder="Ingresa el correo electrónico"
+                                   value="{{ contacto.correo if contacto else '' }}">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Lugar de la cita</label>
+                        <div class="control has-icons-left">
+                            <input class="input" type="text" name="lugar" required
+                                   placeholder="Ingresa el lugar de la cita"
+                                   value="{{ contacto.lugar if contacto else '' }}">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Fecha de la cita</label>
+                        <div class="control has-icons-left">
+                            <input class="input" type="date" name="fecha" required
+                                   value="{{ contacto.fecha.strftime('%Y-%m-%d') if contacto and contacto.fecha else '' }}">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-calendar-alt"></i>
+                            </span>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Motivo de la cita</label>
+                        <div class="control has-icons-left">
+                            <input class="input" type="text" name="motivo" required
+                                placeholder="Ingresa el motivo de la cita"
+                                value="{{ contacto.motivo if contacto else '' }}"
+                            >
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-sticky-note"></i>
+                            </span>
+                    </div>
+
+                     <div class="field">
+                        <label class="label">Hora</label>
+                        <div class="control has-icons-left">
+                            <input class="input" type="time" name="hora" required
+                                   value="{{ contacto.hora.strftime('%H:%M') if contacto and contacto.hora else '' }}">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-clock"></i>
+                            </span>
+                    </div>
+                    
+
+
+                  
+                    <div class="field is-grouped mt-5">
+                        <div class="control">
+                            <button class="button is-primary" type="submit">
+                                <span class="icon is-small">
+                                    <i class="fas fa-save"></i>
+                                </span>
+                                <span>Guardar</span>
+                            </button>
+                        </div>
+                        <div class="control">
+                            <a class="button is-danger" href="{{ url_for('contactos.listar_contactos') }}">
+                                <span class="icon is-small">
+                                    <i class="fas fa-arrow-left"></i>
+                                </span>
+                                <span>Regresar</span>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
